@@ -1,0 +1,67 @@
+﻿@model PruebaPersonaDao.Factura
+
+@{
+    ViewBag.Title = "Eliminar Factura";
+}
+
+<h2 class="text-center">Eliminar Factura</h2>
+
+
+<div>
+  
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            Banco
+            @*@Html.DisplayNameFor(model => model.Banco.Nombre)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Banco.Nombre)
+        </dd>
+
+        <dt>
+            Ciudad
+            @*@Html.DisplayNameFor(model => model.Ciudad.Nombre)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ciudad.Nombre)
+        </dd>
+
+        <dt>
+            Cliente
+            @*@Html.DisplayNameFor(model => model.Cliente.Cédula)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.Cédula)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+            @Html.ActionLink("Salir", "Index")
+        </div>
+    }
+</div>

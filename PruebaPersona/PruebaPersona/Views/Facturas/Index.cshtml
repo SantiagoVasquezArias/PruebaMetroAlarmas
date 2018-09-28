@@ -1,0 +1,105 @@
+﻿@model IEnumerable<PruebaPersonaDao.Factura>
+
+@{
+    ViewBag.Title = "Factura";
+}
+
+<h2 class="text-center">Factura</h2>
+
+
+
+@using (Html.BeginForm())
+{
+
+    <div class="col-md-12">
+        <div class="text-left col-md-6">
+            @Html.ActionLink("Agregar", "Create", new { }, new { @class = "btn btn-primary" })
+        </div>
+
+        <div class="text-right col-md-6">
+            @Html.TextBox("busqueda")
+
+            <input type="submit" value="Buscar" id="busqueda" class="btn btn-info" />
+            <button type="button" class="btn" onclick="limpiaCampo()">Limpiar</button>
+        </div>
+    </div>
+        <br />
+        <br />
+
+        <br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.Cédula)
+            
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.Nombre)
+
+        </th>
+        <th>
+            Ciudad
+            @*@Html.DisplayNameFor(model => model.Ciudad.Nombre)*@
+            
+        </th>
+        <th>
+            Banco
+            @*@Html.DisplayNameFor(model => model.Banco.Nombre)*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+          
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+           @Html.DisplayFor(modelItem => item.Cliente.Cédula)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.Cliente.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ciudad.Nombre)
+           
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Banco.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+            
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })           
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Imprimir", "PrintPartialViewToPdf", new { id = item.Id }, new { @class = "btn btn-success" })
+        </td>
+    </tr>
+}
+
+</table>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script>
+            function limpiaCampo() {
+                //Utilizamos el elemento al que hacemos focus para borrar el campo.
+                document.getElementById("busqueda").value = "";
+            }
+    </script>
+}

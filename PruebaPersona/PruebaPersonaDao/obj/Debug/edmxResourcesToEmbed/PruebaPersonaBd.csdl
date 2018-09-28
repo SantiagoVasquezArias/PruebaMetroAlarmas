@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PruebaPersonaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PruebaPersonaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetRoles" EntityType="PruebaPersonaModel.AspNetRoles" />
+    <EntitySet Name="AspNetUsers" EntityType="PruebaPersonaModel.AspNetUsers" />
+    <EntitySet Name="Banco" EntityType="PruebaPersonaModel.Banco" />
+    <EntitySet Name="Ciudad" EntityType="PruebaPersonaModel.Ciudad" />
+    <EntitySet Name="Cliente" EntityType="PruebaPersonaModel.Cliente" />
+    <EntitySet Name="Factura" EntityType="PruebaPersonaModel.Factura" />
+    <AssociationSet Name="FK_Factura_Banco" Association="PruebaPersonaModel.FK_Factura_Banco">
+      <End Role="Banco" EntitySet="Banco" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Factura_Ciudad" Association="PruebaPersonaModel.FK_Factura_Ciudad">
+      <End Role="Ciudad" EntitySet="Ciudad" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Factura_Cliente" Association="PruebaPersonaModel.FK_Factura_Cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="PruebaPersonaModel.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PruebaPersonaModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetRoles" Relationship="PruebaPersonaModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="Banco">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Factura" Relationship="PruebaPersonaModel.FK_Factura_Banco" FromRole="Banco" ToRole="Factura" />
+  </EntityType>
+  <EntityType Name="Ciudad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Factura" Relationship="PruebaPersonaModel.FK_Factura_Ciudad" FromRole="Ciudad" ToRole="Factura" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cédula" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Factura" Relationship="PruebaPersonaModel.FK_Factura_Cliente" FromRole="Cliente" ToRole="Factura" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCiudad" Type="Int32" />
+    <Property Name="IdCliente" Type="Int32" />
+    <Property Name="IdBanco" Type="Int32" />
+    <Property Name="Valor" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Banco" Relationship="PruebaPersonaModel.FK_Factura_Banco" FromRole="Factura" ToRole="Banco" />
+    <NavigationProperty Name="Ciudad" Relationship="PruebaPersonaModel.FK_Factura_Ciudad" FromRole="Factura" ToRole="Ciudad" />
+    <NavigationProperty Name="Cliente" Relationship="PruebaPersonaModel.FK_Factura_Cliente" FromRole="Factura" ToRole="Cliente" />
+  </EntityType>
+  <Association Name="FK_Factura_Banco">
+    <End Type="PruebaPersonaModel.Banco" Role="Banco" Multiplicity="0..1" />
+    <End Type="PruebaPersonaModel.Factura" Role="Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="IdBanco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Factura_Ciudad">
+    <End Type="PruebaPersonaModel.Ciudad" Role="Ciudad" Multiplicity="0..1" />
+    <End Type="PruebaPersonaModel.Factura" Role="Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="IdCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Factura_Cliente">
+    <End Type="PruebaPersonaModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+    <End Type="PruebaPersonaModel.Factura" Role="Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="PruebaPersonaModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+    <End Type="PruebaPersonaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+  </Association>
+</Schema>

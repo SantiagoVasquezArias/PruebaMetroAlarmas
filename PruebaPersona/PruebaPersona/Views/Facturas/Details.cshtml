@@ -1,0 +1,155 @@
+﻿@model PruebaPersonaDao.Factura
+
+@{
+    ViewBag.Title = "Recibo";
+}
+
+<h2 class="text-center">Recibo de caja</h2>
+
+<style type="text/css">
+   table.redTable {
+  border: 2px solid #444444;
+  background-color: #FFFFFF;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.redTable td, table.redTable th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+table.redTable tbody td {
+  font-size: 13px;
+}
+table.redTable tr:nth-child(even) {
+  background: #F5C8BF;
+}
+table.redTable thead {
+  background: #444444;
+}
+table.redTable thead th {
+  font-size: 19px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  border-left: 2px solid #444444;
+}
+table.redTable thead th:first-child {
+  border-left: none;
+}
+
+table.redTable tfoot {
+  font-size: 13px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #444444;
+}
+table.redTable tfoot td {
+  font-size: 13px;
+}
+table.redTable tfoot .links {
+  text-align: right;
+}
+table.redTable tfoot .links a{
+  display: inline-block;
+  background: #FFFFFF;
+  color: #444444;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+</style>
+
+<div class="container">
+    <div class="row">
+        
+        @*<div>
+            <img src="~/Imagen/MetroAlarmas.png" width="200" height="100" />
+        </div>*@
+
+
+        <table class="redTable" >
+            <thead>
+                <tr>
+                    <th>Numero de Factura</th>                  
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayFor(model => model.Id)</td>                    
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th>Cedula</th>
+                    <th>Cliente</th>
+                    <th>Banco</th>
+                    <th>Ciudad</th>
+                    <th>Valor</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayFor(model => model.Cliente.Cédula)</td>
+                    <td>@Html.DisplayFor(model => model.Cliente.Nombre)</td>
+                    <td>@Html.DisplayFor(model => model.Banco.Nombre)</td>
+                    <td>@Html.DisplayNameFor(model => model.Ciudad.Nombre)</td>
+                    <td>@Html.DisplayFor(model => model.Valor)</td>
+                    <td>@Html.DisplayFor(model => model.Fecha)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Banco.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Banco.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ciudad.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ciudad.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.Cédula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.Cédula)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
